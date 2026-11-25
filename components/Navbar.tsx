@@ -98,12 +98,35 @@ export function Navbar() {
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open devotional navigation menu"
-              className="lg:hidden p-2 rounded-lg bg-[#32170B]/90 border border-[#D4A017]/50 shadow-sm active:scale-95 transition-transform flex flex-col justify-center items-center gap-[4px] w-10 h-10"
+              className="lg:hidden p-1.5 rounded-xl bg-[#32170B]/95 border border-[#D4A017]/70 shadow-md active:scale-95 transition-transform flex items-center justify-center w-11 h-11"
             >
-              {/* Symbolic Tripundra-inspired hamburger: Gandham saffron, Vibhuti white, Kumkum red */}
-              <span className="block w-6 h-[3px] rounded-full bg-[#F26500]" />
-              <span className="block w-6 h-[3px] rounded-full bg-white shadow-[0_0_2px_rgba(255,255,255,0.8)]" />
-              <span className="block w-6 h-[3px] rounded-full bg-[#B91C1C]" />
+              {/* Sacred Namalu / Tripundra-inspired menu lines: Gandham saffron, Vibhuti white, Kumkum red */}
+              <svg
+                viewBox="0 0 36 28"
+                className="w-7 h-6"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 5.5C9 4 27 4 32 5.5"
+                  stroke="#F26500"
+                  strokeWidth="3.4"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M3 14C9 12.6 27 12.6 33 14"
+                  stroke="#FFFFFF"
+                  strokeWidth="3.4"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M4 22.5C9 21 27 21 32 22.5"
+                  stroke="#DC2626"
+                  strokeWidth="3.4"
+                  strokeLinecap="round"
+                />
+                <circle cx="18" cy="14" r="2.2" fill="#DC2626" stroke="#F59E0B" strokeWidth="0.8" />
+              </svg>
             </button>
 
             <Link href="/" className="flex items-center shrink-0">
