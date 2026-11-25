@@ -34,24 +34,24 @@ export default function AboutPage() {
 
   return (
     <div className="parchment-surface">
-      {/* Sabarimala Pilgrimage Hero (Reference 3 & 8) */}
+      {/* Bright Sabarimala Pilgrimage Hero */}
       <section className="relative py-20 sm:py-28 overflow-hidden bg-[#2A1409]">
         <img
-          src="/images/hero-sabarimala.jpg"
+          src="/images/hero-sabarimala.png"
           alt="Sabarimala Pilgrimage"
-          className="absolute inset-0 w-full h-full object-cover opacity-55"
+          className="absolute inset-0 w-full h-full object-cover animate-hero-drift"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/70 via-[#32170B]/55 to-[#F9F3E6]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/45 via-[#32170B]/25 to-[#F9F3E6]/90" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-4">
-          <span className="inline-block px-5 py-1.5 rounded-full bg-[#7A0E0E] text-[#F9F3E6] text-xs font-semibold tracking-[0.2em] uppercase border border-[#D4A017]/60">
+          <span className="inline-block px-5 py-1.5 rounded-full bg-[#7A0E0E] text-[#F9F3E6] text-xs font-semibold tracking-[0.2em] uppercase border border-[#D4A017]/80 shadow-lg">
             About Us
           </span>
-          <h1 className="font-serif-display text-4xl sm:text-6xl font-bold text-[#F9F3E6] drop-shadow-lg">
+          <h1 className="font-serif-display text-4xl sm:text-6xl font-bold text-white drop-shadow-[0_4px_18px_rgba(20,10,5,0.85)]">
             A Journey of Faith.
             <br />A Tradition of Devotion.
           </h1>
-          <p className="text-sm sm:text-lg text-[#F9F3E6]/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg text-white font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_10px_rgba(20,10,5,0.9)] bg-[#32170B]/45 backdrop-blur-sm px-6 py-3 rounded-2xl border border-[#D4A017]/40">
             {settings.about_intro ||
               "DHEERO™ is a genuine Indian brand dedicated to thoughtfully designed headwear inspired by Indian tradition, comfort and contemporary lifestyle."}
           </p>

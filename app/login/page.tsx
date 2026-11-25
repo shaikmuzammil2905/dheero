@@ -112,13 +112,13 @@ export default function LoginPage() {
 
   return (
     <div className="relative min-h-[88vh] flex items-center justify-center py-12 px-4 overflow-hidden bg-[#1B100A]">
-      {/* Reference 2: Dark Forest & Sabarimala Atmosphere */}
+      {/* Grand Animated Sabarimala Temple & Brass Lamp Background */}
       <img
-        src="/images/login-bg.jpg"
+        src="/images/login-bg.png"
         alt="Sabarimala Devotional Atmosphere"
-        className="absolute inset-0 w-full h-full object-cover opacity-85"
+        className="absolute inset-0 w-full h-full object-cover animate-hero-drift"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B100A]/65 via-[#1B100A]/35 to-[#1B100A]/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1B100A]/45 via-[#1B100A]/20 to-[#1B100A]/65" />
 
       <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         {/* Left Atmospheric Quote */}
@@ -346,23 +346,14 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right Atmospheric Label + WhatsApp */}
-        <div className="hidden lg:flex lg:col-span-3 flex-col items-center text-center space-y-6 text-[#F9F3E6]">
-          <div className="space-y-1">
+        {/* Right Atmospheric Label */}
+        <div className="hidden lg:flex lg:col-span-3 flex-col items-center text-center space-y-3 text-[#F9F3E6]">
+          <div className="space-y-1 bg-[#32170B]/55 backdrop-blur-sm px-5 py-4 rounded-2xl border border-[#D4A017]/50 shadow-xl">
             <p className="font-serif-display text-2xl italic drop-shadow-lg">
               Sabarimala Devotional Essentials
             </p>
             <span className="text-[#D4A017] text-sm">✦ ✦ ✦</span>
           </div>
-          <a
-            href={`https://wa.me/91${whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1F6F3D] text-white text-xs font-semibold shadow-xl border border-white/25"
-          >
-            <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp Support: +91 {whatsapp}</span>
-          </a>
         </div>
       </div>
     </div>

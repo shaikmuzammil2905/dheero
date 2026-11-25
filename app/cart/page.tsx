@@ -241,15 +241,6 @@ export default function CartPage() {
                   >
                     <Lock className="w-4 h-4" /> PROCEED TO CHECKOUT →
                   </Link>
-
-                  <a
-                    href={`https://wa.me/91${whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 rounded-xl border border-[#1F6F3D]/40 bg-[#1F6F3D]/5 text-[#1F6F3D] text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#1F6F3D]/10"
-                  >
-                    <MessageCircle className="w-4 h-4" /> Need Help? Chat on WhatsApp
-                  </a>
                 </div>
               </div>
             </div>

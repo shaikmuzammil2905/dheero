@@ -168,16 +168,6 @@ export function Navbar() {
                 {cartCount}
               </span>
             </button>
-
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1F6F3D] hover:bg-[#17552E] text-white text-xs font-semibold tracking-wide shadow-sm transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp</span>
-            </a>
           </div>
         </div>
       </header>
@@ -323,15 +313,6 @@ export function Navbar() {
               </div>
 
               <div className="pt-6 border-t border-[#D4A017]/30 space-y-3">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#1F6F3D] text-white font-semibold text-sm"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp Support (+91 {whatsappNum})
-                </a>
                 <p className="text-xs text-center text-[#5A2E0B]/75">
                   Swamiye Saranam Ayyappa
                 </p>

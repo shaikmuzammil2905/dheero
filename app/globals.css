@@ -21,8 +21,19 @@
   body {
     font-family: var(--font-montserrat), sans-serif;
     background-color: var(--warm-cream);
+    background-image: url("/images/site-bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     color: var(--deep-brown);
     overflow-x: hidden;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      background-attachment: fixed;
+      background-position: center center;
+    }
   }
 
   h1, h2, h3, h4, .font-serif-display {
@@ -30,19 +41,26 @@
   }
 }
 
-/* Subtle handmade parchment texture */
+/* Site-wide translucent parchment surface so site-bg.png stays clearly visible */
 .parchment-surface {
-  background-color: #F9F3E6;
-  background-image:
-    radial-gradient(at 15% 20%, rgba(212, 160, 23, 0.08) 0px, transparent 55%),
-    radial-gradient(at 85% 80%, rgba(122, 14, 14, 0.05) 0px, transparent 55%),
-    linear-gradient(180deg, rgba(255, 252, 245, 0.65) 0%, rgba(243, 232, 208, 0.45) 100%);
+  background-color: rgba(249, 243, 230, 0.28);
+  background-image: linear-gradient(
+    180deg,
+    rgba(249, 243, 230, 0.22) 0%,
+    rgba(249, 243, 230, 0.14) 50%,
+    rgba(249, 243, 230, 0.26) 100%
+  );
 }
 
 .parchment-card {
-  background: linear-gradient(165deg, #FFFDF8 0%, #F7ECDA 100%);
-  border: 1px solid rgba(212, 160, 23, 0.45);
-  box-shadow: 0 18px 45px -16px rgba(50, 23, 11, 0.22), inset 0 0 28px rgba(212, 160, 23, 0.08);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 253, 248, 0.88) 0%,
+    rgba(247, 236, 218, 0.84) 100%
+  );
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(212, 160, 23, 0.55);
+  box-shadow: 0 18px 45px -16px rgba(50, 23, 11, 0.2), inset 0 0 28px rgba(212, 160, 23, 0.08);
 }
 
 /* Traditional temple border motif */
@@ -61,11 +79,6 @@
   );
 }
 
-.gold-hairline {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #D4A017, transparent);
-}
-
 @keyframes gentleFlag {
   0%, 100% {
     transform: translateY(0px) skewY(0deg);
@@ -80,12 +93,12 @@
     transform: scale(1.03) translate3d(0, 0, 0);
   }
   50% {
-    transform: scale(1.07) translate3d(-0.8%, -0.5%, 0);
+    transform: scale(1.075) translate3d(-0.8%, -0.5%, 0);
   }
 }
 
 .animate-hero-drift {
-  animation: slowDrift 22s ease-in-out infinite;
+  animation: slowDrift 20s ease-in-out infinite;
 }
 
 .animate-flag-flutter {

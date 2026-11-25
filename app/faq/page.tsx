@@ -176,19 +176,17 @@ export default function FaqPage() {
             Still have a question or wholesale inquiry?
           </h2>
           <div className="flex flex-wrap justify-center gap-3">
-            <a
-              href={`https://wa.me/91${whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1F6F3D] text-white font-semibold text-sm shadow"
-            >
-              <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
-            </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7A0E0E] text-white font-semibold text-sm shadow"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#7A0E0E] text-white font-semibold text-sm shadow"
             >
-              Contact Us
+              Contact Support
+            </Link>
+            <Link
+              href="/shop"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#F26500] text-white font-semibold text-sm shadow"
+            >
+              Explore Irumudi Rumala
             </Link>
           </div>
         </Reveal>

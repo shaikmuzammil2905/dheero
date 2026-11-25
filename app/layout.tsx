@@ -33,7 +33,18 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#F9F3E6] text-[#32170B] antialiased selection:bg-[#F26500]/20 selection:text-[#7A0E0E]">
+      <body className="min-h-screen flex flex-col bg-[#F9F3E6] text-[#32170B] antialiased selection:bg-[#F26500]/20 selection:text-[#7A0E0E] relative">
+        {/* Site-wide Grand Parchment & Temple-Hills Background (Desktop + Mobile) */}
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 -z-10 pointer-events-none overflow-hidden"
+        >
+          <img
+            src="/images/site-bg.png"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
         <StoreProvider>
           <Navbar />
           <main className="flex-1 pb-16 md:pb-0">{children}</main>

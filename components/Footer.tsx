@@ -21,11 +21,13 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <img
-              src="/images/dheero-logo.png"
-              alt="DHEERO™"
-              className="h-14 w-auto drop-shadow-[0_2px_10px_rgba(249,243,230,0.45)]"
-            />
+            <div className="inline-block rounded-2xl bg-[radial-gradient(ellipse_at_center,rgba(255,250,235,0.95)_0%,rgba(255,250,235,0.6)_55%,transparent_80%)] px-4 py-2">
+              <img
+                src="/images/dheero-logo.png"
+                alt="DHEERO™"
+                className="h-14 sm:h-16 w-auto drop-shadow-[0_2px_6px_rgba(50,23,11,0.3)]"
+              />
+            </div>
             <p className="text-sm text-[#F9F3E6]/85 leading-relaxed">
               DHEERO™ by <strong className="text-white">Dheer Eco Essentials</strong> —
               Thoughtfully designed devotional headwear and essentials inspired by Indian
@@ -125,15 +127,6 @@ export function Footer() {
             >
               <Phone className="w-4 h-4 text-[#D4A017] shrink-0" />
               <span>+91 {phone}</span>
-            </a>
-            <a
-              href={`https://wa.me/91${whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2.5 hover:text-white transition-colors"
-            >
-              <MessageCircle className="w-4 h-4 text-[#D4A017] shrink-0" />
-              <span>WhatsApp: +91 {whatsapp}</span>
             </a>
             <a
               href={`mailto:${email}`}

@@ -7,7 +7,7 @@ export const DEFAULT_COLLECTION: Collection = {
   tagline: "A Journey of Faith.\nA Tradition of Devotion.",
   description:
     "Thoughtfully designed devotional headwear and essentials inspired by the sacred Sabarimala pilgrimage.",
-  hero_image: "/images/hero-sabarimala.jpg",
+  hero_image: "/images/hero-sabarimala.png",
   accent_color: "#F26500",
   primary_color: "#7A0E0E",
   bg_color: "#F9F3E6",

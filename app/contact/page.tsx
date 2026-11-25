@@ -87,21 +87,6 @@ export default function ContactPage() {
               </a>
 
               <a
-                href={`https://wa.me/91${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3.5 rounded-xl bg-[#1F6F3D]/10 border border-[#1F6F3D]/35 hover:bg-[#1F6F3D]/15 transition-colors"
-              >
-                <div className="p-2.5 rounded-lg bg-[#1F6F3D] text-white">
-                  <MessageCircle className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs text-[#1F6F3D]">WhatsApp Chat Support</p>
-                  <p className="font-semibold text-sm text-[#1F6F3D]">+91 {whatsapp}</p>
-                </div>
-              </a>
-
-              <a
                 href={`mailto:${emailAddr}`}
                 className="flex items-center gap-3 p-3.5 rounded-xl bg-white/80 border border-[#D4A017]/40 hover:border-[#F26500] transition-colors"
               >

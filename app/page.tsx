@@ -97,34 +97,38 @@ export default function HomePage() {
     <div className="overflow-hidden">
       {/* SECTION 2: CINEMATIC HERO */}
       <section className="relative min-h-[82vh] sm:min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#1E1008]">
-        {/* Grand Parallax/Drift Background */}
+        {/* Grand HD Animated Sabarimala Background */}
         <img
-          src={activeCollection?.hero_image || "/images/hero-sabarimala.jpg"}
+          src={
+            activeCollection?.slug === "devotional"
+              ? "/images/hero-sabarimala.png"
+              : activeCollection?.hero_image || "/images/hero-sabarimala.png"
+          }
           alt={activeCollection?.name || "Sabarimala Pilgrimage"}
-          className="absolute inset-0 w-full h-full object-cover animate-hero-drift opacity-90"
+          className="absolute inset-0 w-full h-full object-cover animate-hero-drift"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/65 via-[#32170B]/40 to-[#1E1008]/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,243,230,0.12)_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/45 via-[#32170B]/20 to-[#1E1008]/65" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,23,11,0.42)_0%,transparent_62%)]" />
 
         {/* Subtle Saffron Flag Motion Accent */}
-        <div className="hidden lg:block absolute top-10 left-10 pointer-events-none animate-flag-flutter opacity-85">
-          <div className="px-4 py-1.5 rounded-full bg-[#32170B]/70 border border-[#D4A017]/60 text-[#F9F3E6] text-xs tracking-widest uppercase">
+        <div className="hidden lg:block absolute top-10 left-10 pointer-events-none animate-flag-flutter opacity-90">
+          <div className="px-4 py-1.5 rounded-full bg-[#32170B]/75 border border-[#D4A017]/70 text-[#F9F3E6] text-xs tracking-widest uppercase shadow-lg">
             {activeCollection?.name || "Devotional Collection"}
           </div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6 py-14">
-          {/* Centered Transparent Logo */}
+          {/* Centered Transparent Logo with Soft Luminous Halo */}
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="inline-block"
+            className="inline-block rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(255,250,235,0.92)_0%,rgba(255,250,235,0.45)_55%,transparent_78%)] px-8 py-3"
           >
             <img
               src="/images/dheero-logo.png"
               alt="DHEERO™"
-              className="h-20 sm:h-24 w-auto mx-auto drop-shadow-[0_6px_24px_rgba(249,243,230,0.45)]"
+              className="h-20 sm:h-24 w-auto mx-auto drop-shadow-[0_4px_14px_rgba(50,23,11,0.35)]"
             />
           </motion.div>
 
@@ -191,45 +195,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4 FEATURE HIGHLIGHTS STRIP */}
-      <section className="bg-[#F9F3E6] border-b border-[#D4A017]/35">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/* 4 GRAND FEATURE HIGHLIGHTS STRIP */}
+      <section className="parchment-surface border-b-2 border-[#D4A017]/45">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {[
               {
                 icon: Layers,
                 title: "Single Product Focus",
-                sub: "Dedicated Irumudi Rumala",
+                sub: "Dedicated Irumudi Rumala crafted with purpose",
               },
               {
                 icon: Award,
                 title: "Traditional Quality",
-                sub: "Thoughtful • Respectful • Neat",
+                sub: "Thoughtful • Respectful • Neat Finish",
               },
               {
                 icon: Compass,
-                title: "For Your Journey",
+                title: "For Your Sacred Journey",
                 sub: "Designed for Sabarimala Pilgrims",
               },
               {
                 icon: Truck,
                 title: "Pan-India Delivery",
-                sub: "Safe • Reliable • On Time",
+                sub: "Safe • Reliable • On Time Dispatch",
               },
             ].map((item, idx) => (
               <Reveal
                 key={item.title}
                 delay={idx * 0.08}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white/60 border border-[#D4A017]/30"
+                className="parchment-card rounded-2xl p-6 flex items-center gap-4 border-2 border-[#D4A017]/50 hover:-translate-y-1 transition-transform duration-300"
               >
-                <div className="p-2.5 rounded-xl bg-[#7A0E0E]/10 text-[#7A0E0E] shrink-0">
-                  <item.icon className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl bg-[#7A0E0E] text-[#D4A017] flex items-center justify-center shrink-0 border border-[#D4A017]/60 shadow-md">
+                  <item.icon className="w-7 h-7" />
                 </div>
                 <div>
-                  <p className="font-semibold text-xs sm:text-sm text-[#5A2E0B]">
+                  <p className="font-serif-display font-bold text-xl sm:text-2xl text-[#5A2E0B] leading-tight">
                     {item.title}
                   </p>
-                  <p className="text-[11px] sm:text-xs text-[#5A2E0B]/75">{item.sub}</p>
+                  <p className="text-xs sm:text-sm text-[#7A0E0E]/85 mt-1 font-medium">
+                    {item.sub}
+                  </p>
                 </div>
               </Reveal>
             ))}
