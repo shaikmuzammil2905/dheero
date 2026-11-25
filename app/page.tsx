@@ -114,17 +114,17 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6 py-14">
-          {/* Centered Logo Badge */}
+          {/* Centered Transparent Logo */}
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="inline-block bg-[#F9F3E6]/95 px-6 py-2.5 rounded-2xl border-2 border-[#D4A017]/70 shadow-2xl"
+            className="inline-block"
           >
             <img
               src="/images/dheero-logo.png"
               alt="DHEERO™"
-              className="h-14 sm:h-18 w-auto mx-auto mix-blend-multiply"
+              className="h-20 sm:h-24 w-auto mx-auto drop-shadow-[0_6px_24px_rgba(249,243,230,0.45)]"
             />
           </motion.div>
 

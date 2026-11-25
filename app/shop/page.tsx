@@ -315,6 +315,118 @@ function ShopContent() {
         <Reveal>
           <StylingDemo />
         </Reveal>
+
+        {/* Scroll Section 3: Signature Heritage Details & Packaging */}
+        <Reveal className="parchment-card rounded-3xl p-6 sm:p-10 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
+              Inside Every DHEERO™ Pack
+            </span>
+            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
+              Designed for Devotional Dignity & Comfort
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                title: "Dedicated Identity",
+                desc: "Crafted specifically as a Sabarimala Irumudi Rumala rather than generic multi-purpose cloth.",
+              },
+              {
+                title: "Traditional Markings",
+                desc: "Turmeric Yellow features Red Kumkum-inspired marking; Maroon Red features Yellow Gandham-inspired marking.",
+              },
+              {
+                title: "Woven Border Finish",
+                desc: "Neat traditional border detailing that frames the drape cleanly in every wearing style.",
+              },
+              {
+                title: "Pilgrimage Packaging",
+                desc: "Individually folded, quality-checked, and packed cleanly for personal use or gifting.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="p-5 rounded-2xl bg-white/80 border border-[#D4A017]/40 space-y-2"
+              >
+                <h3 className="font-serif-display text-2xl font-bold text-[#7A0E0E]">
+                  {item.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#32170B]/85 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Scroll Section 4: Pilgrimage Care & Colour Selection Guide */}
+        <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+          <div className="rounded-3xl overflow-hidden border-2 border-[#D4A017]/50 shadow-xl">
+            <img
+              src="/images/rumala-trio.jpg"
+              alt="DHEERO™ Irumudi Rumala Trio"
+              className="w-full h-full object-cover aspect-[4/3]"
+            />
+          </div>
+          <div className="parchment-card rounded-3xl p-6 sm:p-9 space-y-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
+              Choosing & Caring
+            </span>
+            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
+              Built for Long Trails & Gentle Care
+            </h2>
+            <p className="text-sm text-[#32170B]/85 leading-relaxed">
+              Whether you choose Turmeric Yellow, Light Brown, or Maroon Red, every
+              DHEERO™ Irumudi Rumala is finished for comfortable breathability during
+              forest walks and temple queues.
+            </p>
+            <ul className="space-y-2 text-sm text-[#5A2E0B]">
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
+                <span>Gentle hand wash with mild detergent keeps colours vibrant</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
+                <span>Dry in shade and iron on low heat to preserve woven borders</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
+                <span>Fold neatly along the border lines for compact Irumudi packing</span>
+              </li>
+            </ul>
+          </div>
+        </Reveal>
+
+        {/* Scroll Section 5: Wholesale Mandali & FAQ CTA */}
+        <Reveal className="rounded-3xl bg-[#7A0E0E] text-[#F9F3E6] border-2 border-[#D4A017]/70 p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="space-y-2 max-w-2xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4A017]">
+              Retail & Wholesale Support
+            </span>
+            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold">
+              Ordering for a Mandali Group or Devotional Store?
+            </h2>
+            <p className="text-sm text-[#F9F3E6]/85">
+              Dheer Eco Essentials fulfils both single-piece retail orders and bulk
+              pilgrimage group requirements across India.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 shrink-0">
+            <Link
+              href="/contact"
+              className="px-6 py-3 rounded-full bg-[#F26500] hover:bg-[#d85700] text-white font-semibold text-sm shadow-lg"
+            >
+              Bulk / Wholesale Inquiry
+            </Link>
+            <Link
+              href="/faq"
+              className="px-6 py-3 rounded-full border border-[#D4A017] text-[#F9F3E6] font-semibold text-sm hover:bg-white/10"
+            >
+              Read FAQs
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </div>
   );

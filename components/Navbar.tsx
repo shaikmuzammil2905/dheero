@@ -110,7 +110,7 @@ export function Navbar() {
               <img
                 src="/images/dheero-logo.png"
                 alt="DHEERO™"
-                className="h-11 sm:h-13 md:h-14 w-auto object-contain mix-blend-multiply"
+                className="h-11 sm:h-13 md:h-14 w-auto object-contain"
               />
             </Link>
           </div>
@@ -267,7 +267,7 @@ export function Navbar() {
                   <img
                     src="/images/dheero-logo.png"
                     alt="DHEERO™"
-                    className="h-11 w-auto mix-blend-multiply"
+                    className="h-11 w-auto"
                   />
                   <button
                     type="button"

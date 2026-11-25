@@ -114,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vision & Important Note */}
-      <section className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Reveal className="parchment-card rounded-2xl p-6 sm:p-8 text-center space-y-3">
           <h3 className="font-serif-display text-3xl font-bold text-[#5A2E0B]">
             Our Vision
@@ -129,6 +129,43 @@ export default function AboutPage() {
             Disclaimer: DHEERO™ is an independent brand and is not officially affiliated
             with or endorsed by the Sabarimala temple or its administration.
           </p>
+        </Reveal>
+
+        {/* Scroll Section 5: Scalable Brand Architecture & Future Collections */}
+        <Reveal className="parchment-card rounded-3xl p-6 sm:p-10 space-y-6">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
+              Built for 365 Days & Beyond
+            </span>
+            <h3 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
+              One Parent Brand. Diverse Cultural Expressions.
+            </h3>
+            <p className="text-sm text-[#32170B]/80">
+              While our inaugural launch is dedicated exclusively to Ayyappa devotees,
+              DHEERO™ is architected to grow thoughtfully across Indian headwear traditions.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+            {[
+              { title: "Devotional", status: "Active Launch", desc: "Sabarimala Irumudi Rumala & pilgrimage essentials." },
+              { title: "Heritage Scarves", status: "Future Roadmap", desc: "Traditional Indian weaves & cultural motifs." },
+              { title: "Biker & Rider", status: "Future Roadmap", desc: "Helmet-compatible bandanas for road comfort." },
+              { title: "Sports & Lifestyle", status: "Future Roadmap", desc: "Breathable everyday wraps & athletic headwear." },
+            ].map((col) => (
+              <div
+                key={col.title}
+                className="p-4 rounded-2xl bg-white/80 border border-[#D4A017]/40 space-y-1.5"
+              >
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#7A0E0E]/10 text-[#7A0E0E] text-[10px] font-bold uppercase">
+                  {col.status}
+                </span>
+                <h4 className="font-serif-display text-xl font-bold text-[#5A2E0B]">
+                  {col.title}
+                </h4>
+                <p className="text-xs text-[#32170B]/80">{col.desc}</p>
+              </div>
+            ))}
+          </div>
         </Reveal>
       </section>
     </div>

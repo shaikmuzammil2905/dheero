@@ -248,6 +248,70 @@ export default function ContactPage() {
             </form>
           </Reveal>
         </div>
+
+        {/* Scroll Section 3: Wholesale & Mandali Ordering */}
+        <Reveal className="parchment-card rounded-3xl p-6 sm:p-10 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
+              Bulk & Mandali Orders
+            </span>
+            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
+              Supporting Pilgrim Groups & Retailers Across India
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "Mandali & Pilgrim Groups",
+                desc: "Uniform colour batches (Turmeric Yellow, Light Brown, or Maroon Red) packed cleanly for group yatras.",
+              },
+              {
+                title: "Devotional Stores & Traders",
+                desc: "Dedicated wholesale pricing tiers and GST-invoiced billing from Dheer Eco Essentials.",
+              },
+              {
+                title: "Fast Pan-India Dispatch",
+                desc: "Coordinated road and courier dispatch from Khammam, Telangana for timely seasonal arrival.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="p-5 rounded-2xl bg-white/80 border border-[#D4A017]/40 space-y-2"
+              >
+                <h3 className="font-serif-display text-2xl font-bold text-[#7A0E0E]">
+                  {card.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#32170B]/85 leading-relaxed">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Scroll Section 4: Business Identity & 2027 Physical Store Roadmap */}
+        <Reveal className="rounded-3xl bg-[#32170B] text-[#F9F3E6] border border-[#D4A017]/50 p-6 sm:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div className="space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4A017]">
+              Dheer Eco Essentials
+            </span>
+            <h2 className="font-serif-display text-3xl font-bold">
+              Direct Online Store Today. Flagship Store Planned for 2027.
+            </h2>
+            <p className="text-sm text-[#F9F3E6]/85 leading-relaxed">
+              We currently operate exclusively online with direct dispatch from Khammam,
+              Telangana (GSTIN: {settings.gst || "36ACMPL5503H"}), ensuring consistent
+              quality and responsive WhatsApp support.
+            </p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[#462110] border border-[#D4A017]/40 text-sm space-y-1.5">
+            <p className="font-bold text-[#D4A017]">Registered Address</p>
+            <p>{address}</p>
+            <p className="text-xs text-[#F9F3E6]/75 pt-1">
+              Owner: {settings.owner_name || "L. Sai Chand (DHEER)"}
+            </p>
+          </div>
+        </Reveal>
       </div>
     </div>
   );

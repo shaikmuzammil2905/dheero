@@ -21,13 +21,11 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="inline-block bg-[#F9F3E6] px-3 py-1.5 rounded-xl border border-[#D4A017]/60">
-              <img
-                src="/images/dheero-logo.png"
-                alt="DHEERO™"
-                className="h-12 w-auto mix-blend-multiply"
-              />
-            </div>
+            <img
+              src="/images/dheero-logo.png"
+              alt="DHEERO™"
+              className="h-14 w-auto drop-shadow-[0_2px_10px_rgba(249,243,230,0.45)]"
+            />
             <p className="text-sm text-[#F9F3E6]/85 leading-relaxed">
               DHEERO™ by <strong className="text-white">Dheer Eco Essentials</strong> —
               Thoughtfully designed devotional headwear and essentials inspired by Indian

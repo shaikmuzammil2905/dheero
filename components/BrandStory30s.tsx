@@ -198,7 +198,7 @@ export function BrandStory30s({ onExplore }: { onExplore?: () => void }) {
                 transition={{ duration: 0.7 }}
                 src="/images/dheero-logo.png"
                 alt="DHEERO™"
-                className="h-20 sm:h-24 w-auto mx-auto mix-blend-multiply"
+                className="h-20 sm:h-24 w-auto mx-auto"
               />
             )}
 

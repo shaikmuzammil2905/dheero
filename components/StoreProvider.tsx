@@ -2,6 +2,12 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { CartItem, Collection, FaqItem, Product } from "@/lib/types";
+import {
+  DEFAULT_COLLECTION,
+  DEFAULT_FAQS,
+  DEFAULT_PRODUCTS,
+  DEFAULT_SETTINGS,
+} from "@/lib/defaults";
 
 interface StoreContextValue {
   cart: CartItem[];
@@ -30,20 +36,28 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [activeCollection, setActiveCollection] = useState<Collection | null>(null);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [settings, setSettings] = useState<Record<string, string>>({});
-  const [faqs, setFaqs] = useState<FaqItem[]>([]);
+  const [activeCollection, setActiveCollection] = useState<Collection | null>(
+    DEFAULT_COLLECTION
+  );
+  const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
+  const [settings, setSettings] = useState<Record<string, string>>(DEFAULT_SETTINGS);
+  const [faqs, setFaqs] = useState<FaqItem[]>(DEFAULT_FAQS);
 
   const refreshStore = async () => {
     try {
       const res = await fetch("/api/store", { cache: "no-store" });
       if (!res.ok) return;
       const data = await res.json();
-      setActiveCollection(data.activeCollection ?? null);
-      setProducts(data.products ?? []);
-      setSettings(data.settings ?? {});
-      setFaqs(data.faqs ?? []);
+      if (data.activeCollection) setActiveCollection(data.activeCollection);
+      if (Array.isArray(data.products) && data.products.length > 0) {
+        setProducts(data.products);
+      }
+      if (data.settings && Object.keys(data.settings).length > 0) {
+        setSettings(data.settings);
+      }
+      if (Array.isArray(data.faqs) && data.faqs.length > 0) {
+        setFaqs(data.faqs);
+      }
     } catch (err) {
       console.error("Failed to fetch store data:", err);
     }

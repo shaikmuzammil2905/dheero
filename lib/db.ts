@@ -1,20 +1,35 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { hashPassword } from "./auth";
 import type { Collection, FaqItem, Order, Product, ProductVariant } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const DB_PATH = path.join(DATA_DIR, "dheero.db");
+function resolveDbPath(): string {
+  const localDir = path.join(process.cwd(), "data");
+  try {
+    if (!fs.existsSync(localDir)) {
+      fs.mkdirSync(localDir, { recursive: true });
+    }
+    const probe = path.join(localDir, ".write-test");
+    fs.writeFileSync(probe, "1");
+    fs.unlinkSync(probe);
+    return path.join(localDir, "dheero.db");
+  } catch {
+    const tmpDir = path.join(os.tmpdir(), "dheero-data");
+    if (!fs.existsSync(tmpDir)) {
+      fs.mkdirSync(tmpDir, { recursive: true });
+    }
+    return path.join(tmpDir, "dheero.db");
+  }
+}
 
 let dbInstance: DatabaseSync | null = null;
 
 export function getDb(): DatabaseSync {
   if (dbInstance) return dbInstance;
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  const db = new DatabaseSync(DB_PATH);
+  const dbPath = resolveDbPath();
+  const db = new DatabaseSync(dbPath);
   db.exec("PRAGMA journal_mode = WAL;");
   db.exec("PRAGMA foreign_keys = ON;");
   initSchema(db);

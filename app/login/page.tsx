@@ -136,7 +136,7 @@ export default function LoginPage() {
               <img
                 src="/images/dheero-logo.png"
                 alt="DHEERO™"
-                className="h-16 sm:h-20 w-auto mx-auto mix-blend-multiply"
+                className="h-16 sm:h-20 w-auto mx-auto"
               />
               <div className="flex items-center justify-center gap-2 text-[#D4A017]">
                 <span className="h-[1px] w-12 bg-[#D4A017]" />

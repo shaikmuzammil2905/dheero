@@ -112,6 +112,78 @@ export default function CraftPage() {
             </div>
           </div>
         </Reveal>
+        {/* Scroll Section 4: Colour & Marking Craft */}
+        <Reveal className="parchment-card rounded-3xl p-6 sm:p-10 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <GoldOrnamentalDivider label="Colour & Symbolism" />
+            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
+              Signature Variant Craftsmanship
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                img: "/images/rumala-turmeric.jpg",
+                name: "Turmeric Yellow",
+                note: "Paired with a Red Kumkum-inspired horizontal marking and traditional maroon-gold woven border.",
+              },
+              {
+                img: "/images/rumala-brown.jpg",
+                name: "Light Brown",
+                note: "Earthy natural tone with fine woven border detailing; marking specification editable via Admin.",
+              },
+              {
+                img: "/images/rumala-maroon.jpg",
+                name: "Maroon Red",
+                note: "Paired with a Yellow Gandham-inspired horizontal marking and antique gold woven border.",
+              },
+            ].map((v) => (
+              <div
+                key={v.name}
+                className="rounded-2xl overflow-hidden bg-white/80 border border-[#D4A017]/40 flex flex-col"
+              >
+                <img
+                  src={v.img}
+                  alt={v.name}
+                  className="w-full aspect-square object-cover"
+                />
+                <div className="p-5 space-y-1.5">
+                  <h3 className="font-serif-display text-2xl font-bold text-[#7A0E0E]">
+                    {v.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#32170B]/85 leading-relaxed">
+                    {v.note}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Scroll Section 5: Dispatch & Packaging Standards */}
+        <Reveal className="rounded-3xl bg-[#32170B] text-[#F9F3E6] border border-[#D4A017]/50 p-6 sm:p-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              title: "Neatly Folded Presentation",
+              desc: "Every rumala is folded consistently so the border and devotional marking stay crisp in transit.",
+            },
+            {
+              title: "Batch Quality Inspection",
+              desc: "Each unit undergoes visual inspection for weave uniformity, edge stitching, and colour consistency.",
+            },
+            {
+              title: "Pan-India Safe Packaging",
+              desc: "Moisture-protected outer packaging ensures your devotional headwear arrives clean and ready.",
+            },
+          ].map((item) => (
+            <div key={item.title} className="space-y-2">
+              <h3 className="font-serif-display text-2xl font-bold text-[#D4A017]">
+                {item.title}
+              </h3>
+              <p className="text-sm text-[#F9F3E6]/85 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </Reveal>
       </div>
     </div>
   );
