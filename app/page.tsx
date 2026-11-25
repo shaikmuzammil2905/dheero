@@ -96,8 +96,18 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* SECTION 2: CINEMATIC HERO */}
-      <section className="relative min-h-[82vh] sm:min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#1E1008]">
-        {/* Grand HD Animated Sabarimala Background */}
+      <section className="relative min-h-[78vh] sm:min-h-[86vh] flex items-center justify-center overflow-hidden bg-[#1E1008]">
+        {/* Mobile Hero Image (Bright Portrait Sabarimala View) */}
+        <img
+          src={
+            activeCollection?.slug === "devotional"
+              ? "/images/hero-sabarimala-mobile.jpg"
+              : activeCollection?.hero_image || "/images/hero-sabarimala-mobile.jpg"
+          }
+          alt={activeCollection?.name || "Sabarimala Pilgrimage"}
+          className="md:hidden absolute inset-0 w-full h-full object-cover object-center animate-hero-drift brightness-105"
+        />
+        {/* Desktop Hero Image (HD Widescreen Sabarimala View) */}
         <img
           src={
             activeCollection?.slug === "devotional"
@@ -105,10 +115,10 @@ export default function HomePage() {
               : activeCollection?.hero_image || "/images/hero-sabarimala.png"
           }
           alt={activeCollection?.name || "Sabarimala Pilgrimage"}
-          className="absolute inset-0 w-full h-full object-cover animate-hero-drift"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover animate-hero-drift"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/45 via-[#32170B]/20 to-[#1E1008]/65" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,23,11,0.42)_0%,transparent_62%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/25 via-[#32170B]/15 to-[#1E1008]/55 md:from-[#1E1008]/45 md:via-[#32170B]/20 md:to-[#1E1008]/65" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,23,11,0.34)_0%,transparent_64%)]" />
 
         {/* Subtle Saffron Flag Motion Accent */}
         <div className="hidden lg:block absolute top-10 left-10 pointer-events-none animate-flag-flutter opacity-90">
@@ -310,7 +320,7 @@ export default function HomePage() {
 
       {/* SECTION 4: SIGNATURE COLLECTION (SINGLE PRODUCT WITH SELECTABLE VARIANTS) */}
       {product && selectedVariant && (
-        <section className="py-16 sm:py-20 bg-[#F4E9D5]/70 border-y border-[#D4A017]/35">
+        <section className="py-14 sm:py-20 bg-[#F4E9D5]/35 backdrop-blur-[1px] border-y border-[#D4A017]/35">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-10">
               <GoldOrnamentalDivider label="Signature Launch" />
@@ -538,7 +548,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 9: ORDINARY RUMALA VS DHEERO RUMALA */}
-      <section className="py-16 sm:py-20 bg-[#F4E9D5]/70 border-t border-[#D4A017]/35">
+      <section className="py-14 sm:py-20 bg-[#F4E9D5]/35 backdrop-blur-[1px] border-t border-[#D4A017]/35">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <Reveal className="text-center space-y-2">
             <GoldOrnamentalDivider label="Comparison" />
