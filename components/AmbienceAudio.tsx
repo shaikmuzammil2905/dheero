@@ -10,7 +10,7 @@ import { Volume2, VolumeX } from "lucide-react";
  */
 export function AmbienceAudio() {
   const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.35);
+  const [volume, setVolume] = useState(0.85);
   const ctxRef = useRef<AudioContext | null>(null);
   const masterGainRef = useRef<GainNode | null>(null);
   const bellTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -37,12 +37,12 @@ export function AmbienceAudio() {
       osc.type = "sine";
       osc.frequency.setValueAtTime(f, now);
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.14 / (idx + 1), now + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+      gain.gain.exponentialRampToValueAtTime(0.45 / (idx + 1), now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.4);
       osc.connect(gain);
       gain.connect(master);
       osc.start(now);
-      osc.stop(now + 4.3);
+      osc.stop(now + 4.5);
     });
   };
 
@@ -54,12 +54,12 @@ export function AmbienceAudio() {
       master.gain.value = volume;
       master.connect(ctx.destination);
 
-      // Soft warm forest/river drone
+      // Warm forest/river drone
       const drone = ctx.createOscillator();
       const droneGain = ctx.createGain();
       drone.type = "sine";
       drone.frequency.value = 136.1; // calm Om resonance frequency
-      droneGain.gain.value = 0.05;
+      droneGain.gain.value = 0.16;
       drone.connect(droneGain);
       droneGain.connect(master);
       drone.start();
@@ -105,8 +105,8 @@ export function AmbienceAudio() {
       {playing && (
         <input
           type="range"
-          min={0.05}
-          max={0.8}
+          min={0.1}
+          max={1.0}
           step={0.05}
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}

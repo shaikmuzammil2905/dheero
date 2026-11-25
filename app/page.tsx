@@ -190,7 +190,7 @@ export default function HomePage() {
 
       {/* 4 GRAND FEATURE HIGHLIGHTS STRIP */}
       <section className="parchment-surface border-b-2 border-[#D4A017]/45">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {[
               {
@@ -237,7 +237,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 3: PRODUCT INTRODUCTION */}
-      <section className="py-16 sm:py-20 parchment-surface">
+      <section className="py-7 sm:py-10 parchment-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <Reveal className="space-y-5">
@@ -302,8 +302,8 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 6: THE 30-SECOND DHEERO BRAND STORY */}
-      <section className="py-16 sm:py-20 parchment-surface">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="py-7 sm:py-10 parchment-surface">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <Reveal className="text-center max-w-2xl mx-auto space-y-2">
             <GoldOrnamentalDivider label="Brand Storytelling" />
             <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
@@ -321,9 +321,9 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 7: THE MEANING OF THE SACRED JOURNEY */}
-      <section className="py-16 sm:py-20 bg-[#32170B] text-[#F9F3E6]">
+      <section className="py-8 sm:py-12 bg-[#32170B] text-[#F9F3E6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-3 mb-12">
+          <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-6">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4A017]">
               Pilgrimage Reflections
             </span>
@@ -363,9 +363,9 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 8: WHY CHOOSE DHEERO? */}
-      <section className="py-16 sm:py-20 parchment-surface">
+      <section className="py-7 sm:py-10 parchment-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-12">
+          <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-6">
             <GoldOrnamentalDivider label="Why DHEERO™" />
             <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
               Thoughtful Craft in Every Detail
@@ -414,8 +414,8 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 9: ORDINARY RUMALA VS DHEERO RUMALA */}
-      <section className="py-14 sm:py-20 bg-[#F4E9D5]/35 backdrop-blur-[1px] border-t border-[#D4A017]/35">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="py-7 sm:py-10 bg-[#F4E9D5]/35 backdrop-blur-[1px] border-t border-[#D4A017]/35">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <Reveal className="text-center space-y-2">
             <GoldOrnamentalDivider label="Comparison" />
             <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">

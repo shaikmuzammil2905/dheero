@@ -59,7 +59,7 @@ export default function AboutPage() {
       </section>
 
       {/* Four Story Cards */}
-      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-7 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <GoldOrnamentalDivider label="Our Ethos" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {STORY_CARDS.map((card, idx) => (

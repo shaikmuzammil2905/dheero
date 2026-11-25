@@ -92,8 +92,8 @@ function ShopContent() {
       : 0;
 
   return (
-    <div className="parchment-surface py-6 sm:py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <div className="parchment-surface py-4 sm:py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs sm:text-sm text-[#5A2E0B]/75">
           <Link href="/" className="inline-flex items-center gap-1 hover:text-[#7A0E0E]">

@@ -40,7 +40,7 @@ export function GoldOrnamentalDivider({
       whileInView={{ opacity: 1, scaleX: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`flex items-center justify-center gap-3 my-4 ${className}`}
+      className={`flex items-center justify-center gap-3 my-2 ${className}`}
     >
       <span className="h-[1px] w-16 sm:w-28 bg-gradient-to-r from-transparent to-[#D4A017]" />
       {label ? (

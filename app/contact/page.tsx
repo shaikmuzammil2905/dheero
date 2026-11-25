@@ -52,8 +52,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="parchment-surface py-12 sm:py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="parchment-surface py-6 sm:py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <Reveal className="text-center space-y-3">
           <GoldOrnamentalDivider label="Get in Touch" />
           <h1 className="font-serif-display text-4xl sm:text-6xl font-bold text-[#5A2E0B]">

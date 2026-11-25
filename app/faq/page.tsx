@@ -20,8 +20,8 @@ export default function FaqPage() {
   );
 
   return (
-    <div className="parchment-surface py-12 sm:py-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="parchment-surface py-6 sm:py-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Scroll Section 1: Header & Search */}
         <Reveal className="text-center space-y-4">
           <GoldOrnamentalDivider label="Support & Answers" />
