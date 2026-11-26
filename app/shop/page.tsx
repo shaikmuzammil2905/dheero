@@ -21,6 +21,7 @@ import { useStore } from "@/components/StoreProvider";
 import { Viewer360 } from "@/components/Viewer360";
 import { StylingDemo } from "@/components/StylingDemo";
 import { Reveal } from "@/components/MotionPrimitives";
+import { playTempleGhanta } from "@/lib/sound";
 
 function ShopContent() {
   const router = useRouter();
@@ -57,6 +58,7 @@ function ShopContent() {
 
   const handleAddToCart = () => {
     if (!activeVariant) return;
+    playTempleGhanta();
     addToCart({
       productId: product.id,
       productName: product.name,
@@ -72,6 +74,7 @@ function ShopContent() {
 
   const handleBuyNow = () => {
     if (!activeVariant) return;
+    playTempleGhanta();
     addToCart({
       productId: product.id,
       productName: product.name,
@@ -177,7 +180,10 @@ function ShopContent() {
                     <button
                       key={variant.id}
                       type="button"
-                      onClick={() => setSelectedVariantId(variant.id)}
+                      onClick={() => {
+                        playTempleGhanta();
+                        setSelectedVariantId(variant.id);
+                      }}
                       className={`relative p-2 rounded-2xl border-2 text-left transition-all ${
                         selected
                           ? "border-[#F26500] bg-white shadow-md"

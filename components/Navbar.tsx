@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useStore } from "./StoreProvider";
+import { playTempleGhanta } from "@/lib/sound";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -147,6 +148,9 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => {
+                    if (link.href === "/shop") playTempleGhanta();
+                  }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     active
                       ? "bg-[#7A0E0E] text-[#F9F3E6] shadow-sm border border-[#D4A017]/50"
@@ -211,6 +215,7 @@ export function Navbar() {
         </Link>
         <Link
           href="/shop"
+          onClick={() => playTempleGhanta()}
           className={`flex flex-col items-center justify-center gap-0.5 text-[11px] ${
             pathname.startsWith("/shop")
               ? "bg-[#F26500] text-white font-semibold"

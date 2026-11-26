@@ -3,7 +3,6 @@ import "./globals.css";
 import { StoreProvider } from "@/components/StoreProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { FloatingSupport } from "@/components/FloatingSupport";
 
 export const metadata: Metadata = {
   title: "DHEERO™ | A Journey of Faith. A Tradition of Devotion.",
@@ -49,7 +48,6 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1 pb-16 md:pb-0">{children}</main>
           <Footer />
-          <FloatingSupport />
         </StoreProvider>
       </body>
     </html>

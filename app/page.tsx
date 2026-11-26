@@ -17,6 +17,7 @@ import {
 import { useStore } from "@/components/StoreProvider";
 import { GoldOrnamentalDivider, Reveal } from "@/components/MotionPrimitives";
 import { BrandStory30s } from "@/components/BrandStory30s";
+import { playTempleGhanta } from "@/lib/sound";
 
 const COMPARISON_ROWS = [
   {
@@ -162,6 +163,7 @@ export default function HomePage() {
           >
             <Link
               href="/shop"
+              onClick={() => playTempleGhanta()}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#F26500] hover:bg-[#d85700] text-white font-bold text-sm sm:text-base tracking-wide shadow-[0_10px_30px_rgba(242,101,0,0.45)] transition-transform hover:scale-105"
             >
               <span>
@@ -273,6 +275,7 @@ export default function HomePage() {
               <div className="pt-2">
                 <Link
                   href="/shop"
+                  onClick={() => playTempleGhanta()}
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#7A0E0E] hover:bg-[#5f0a0a] text-[#F9F3E6] font-semibold text-sm shadow-lg transition-transform hover:scale-105"
                 >
                   DISCOVER THE RUMALA <ArrowRight className="w-4 h-4" />

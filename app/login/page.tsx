@@ -14,6 +14,7 @@ import {
   Award,
 } from "lucide-react";
 import { useStore } from "@/components/StoreProvider";
+import { playSwamiyeSaranamAyyappa } from "@/lib/sound";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -51,6 +52,7 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
+      playSwamiyeSaranamAyyappa();
       if (data.user?.role === "admin") {
         router.push("/admin");
       } else {
@@ -78,6 +80,7 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
+      playSwamiyeSaranamAyyappa();
       router.push("/account");
     } catch {
       setErrorMsg("Network error. Please try again.");
