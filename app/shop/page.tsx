@@ -3,27 +3,22 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  Check,
-  ChevronRight,
-  Feather,
-  Home,
-  Minus,
-  Plus,
-  Ruler,
-  ShieldCheck,
-  ShoppingCart,
-  Sparkles,
-  Truck,
-  Zap,
-} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, Eye, Minus, Plus, ShoppingBag, X } from "lucide-react";
 import { useStore } from "@/components/StoreProvider";
 import { Viewer360 } from "@/components/Viewer360";
-import { StylingDemo } from "@/components/StylingDemo";
-import { Reveal } from "@/components/MotionPrimitives";
 import { playTempleGhanta } from "@/lib/sound";
 
-function ShopContent() {
+const BENEFITS = [
+  "Natural dye-inspired fabric.",
+  "Herbal-infused textile concept.",
+  "Designed for comfortable skin contact.",
+  "Reusable and multipurpose.",
+  "Suitable for the devotional journey.",
+  "Thoughtfully designed for everyday use.",
+];
+
+function ProductContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialVariantId = searchParams.get("variant");
@@ -34,6 +29,8 @@ function ShopContent() {
 
   const [selectedVariantId, setSelectedVariantId] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
+  const [addedFeedback, setAddedFeedback] = useState(false);
+  const [wearingOpen, setWearingOpen] = useState(false);
 
   useEffect(() => {
     if (!variants.length) return;
@@ -44,20 +41,17 @@ function ShopContent() {
     }
   }, [variants, initialVariantId, selectedVariantId]);
 
-  if (!product) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4">
-        <div className="w-12 h-12 rounded-full border-4 border-[#D4A017] border-t-[#7A0E0E] animate-spin mx-auto" />
-        <p className="text-[#5A2E0B] font-medium">Loading DHEERO™ Irumudi Rumala...</p>
-      </div>
-    );
-  }
-
   const activeVariant =
     variants.find((v) => v.id === selectedVariantId) || variants[0];
 
+  if (!product || !activeVariant) {
+    return null;
+  }
+
+  const isYellow = activeVariant.color_name.toLowerCase().includes("yellow");
+  const wearingImage = isYellow ? "/images/wear-yellow.png" : "/images/wear-red.png";
+
   const handleAddToCart = () => {
-    if (!activeVariant) return;
     playTempleGhanta();
     addToCart({
       productId: product.id,
@@ -70,48 +64,16 @@ function ShopContent() {
       image: activeVariant.primary_image,
       quantity,
     });
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 4000);
   };
-
-  const handleBuyNow = () => {
-    if (!activeVariant) return;
-    playTempleGhanta();
-    addToCart({
-      productId: product.id,
-      productName: product.name,
-      variantId: activeVariant.id,
-      colorName: activeVariant.color_name,
-      colorHex: activeVariant.color_hex,
-      sku: activeVariant.sku,
-      price: activeVariant.price,
-      image: activeVariant.primary_image,
-      quantity,
-    });
-    router.push("/checkout");
-  };
-
-  const discountPct =
-    product.mrp_price > activeVariant.price
-      ? Math.round(((product.mrp_price - activeVariant.price) / product.mrp_price) * 100)
-      : 0;
 
   return (
-    <div className="parchment-surface py-4 sm:py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs sm:text-sm text-[#5A2E0B]/75">
-          <Link href="/" className="inline-flex items-center gap-1 hover:text-[#7A0E0E]">
-            <Home className="w-3.5 h-3.5" /> Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span>{product.category}</span>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="font-semibold text-[#7A0E0E]">{product.name}</span>
-        </nav>
-
-        {/* Main Product Grid */}
+    <div className="bg-[#F8F3E8] py-8 sm:py-12 min-h-[82vh]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left: Interactive Gallery & 360 Viewer */}
-          <div className="lg:col-span-6">
+          {/* Left: Centerpiece 360° Product Viewer + "See how it looks on you." */}
+          <div className="lg:col-span-6 space-y-3">
             <Viewer360
               frames360={activeVariant.frames_360}
               galleryImages={
@@ -122,58 +84,49 @@ function ShopContent() {
               productName={product.name}
               colorName={activeVariant.color_name}
             />
+
+            <div className="flex items-center justify-between pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  playTempleGhanta();
+                  setWearingOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#541D25] underline decoration-[#C6A04A] underline-offset-4 hover:text-[#C8242C] transition-colors"
+              >
+                <Eye className="w-4 h-4 text-[#C8242C]" />
+                See how it looks on you.
+              </button>
+              <span className="text-xs text-[#29231D]/65">
+                SKU: {activeVariant.sku}
+              </span>
+            </div>
           </div>
 
-          {/* Right: Product Information & Purchase Controls */}
+          {/* Right: Essential Product Details & Add to Cart */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="space-y-2">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-[#7A0E0E] text-[#F9F3E6] text-[11px] font-semibold uppercase tracking-wider">
-                  {product.product_type}
-                </span>
-                <span className="text-xs text-[#5A2E0B]/70 font-medium">
-                  SKU: {activeVariant.sku}
-                </span>
-              </div>
-              <h1 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
+            <div className="space-y-2 border-b border-[#C6A04A]/35 pb-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#96752D]">
+                Devotional Headwear
+              </p>
+              <h1 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#541D25]">
                 {product.name}
               </h1>
-              <p className="text-sm sm:text-base text-[#32170B]/85 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#29231D]/85 leading-relaxed">
                 {product.description}
+              </p>
+              <p className="text-3xl font-bold text-[#29231D] pt-2">
+                ₹{activeVariant.price}
               </p>
             </div>
 
-            {/* Price Block */}
-            <div className="flex flex-wrap items-center gap-3 pb-4 border-b border-[#D4A017]/35">
-              <span className="text-3xl sm:text-4xl font-bold text-[#7A0E0E]">
-                ₹{activeVariant.price}
-              </span>
-              {product.mrp_price > activeVariant.price && (
-                <span className="text-lg line-through text-[#5A2E0B]/50">
-                  ₹{product.mrp_price}
-                </span>
-              )}
-              {discountPct > 0 && (
-                <span className="px-2.5 py-0.5 rounded-full bg-[#7A0E0E] text-white text-xs font-bold">
-                  {discountPct}% OFF
-                </span>
-              )}
-              <span className="ml-auto text-xs font-semibold text-[#1F6F3D]">
-                {activeVariant.stock > 0
-                  ? `In Stock (${activeVariant.stock} units)`
-                  : "Currently Out of Stock"}
-              </span>
-            </div>
-
-            {/* Colour Variant Selector */}
+            {/* Color Selection (Red & Yellow) */}
             <div className="space-y-2.5">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-[#5A2E0B]">
-                  Select Colour:{" "}
-                  <span className="text-[#7A0E0E]">{activeVariant.color_name}</span>
-                </p>
-              </div>
-              <div className="grid grid-cols-3 gap-3">
+              <p className="text-sm font-semibold text-[#29231D]">
+                Color:{" "}
+                <span className="text-[#541D25]">{activeVariant.color_name}</span>
+              </p>
+              <div className="flex flex-wrap gap-3">
                 {variants.map((variant) => {
                   const selected = variant.id === activeVariant.id;
                   return (
@@ -184,270 +137,196 @@ function ShopContent() {
                         playTempleGhanta();
                         setSelectedVariantId(variant.id);
                       }}
-                      className={`relative p-2 rounded-2xl border-2 text-left transition-all ${
+                      className={`flex items-center gap-2.5 px-5 py-2.5 rounded-full border-2 text-sm font-semibold transition-all ${
                         selected
-                          ? "border-[#F26500] bg-white shadow-md"
-                          : "border-[#D4A017]/40 bg-white/70 hover:bg-white"
+                          ? "border-[#541D25] bg-[#EFE6D5] text-[#541D25] shadow-sm"
+                          : "border-[#C6A04A]/45 bg-white/70 text-[#29231D] hover:bg-white"
                       }`}
                     >
-                      {selected && (
-                        <span className="absolute top-2 right-2 w-5 h-5 rounded-full bg-[#F26500] text-white flex items-center justify-center shadow">
-                          <Check className="w-3 h-3" />
-                        </span>
-                      )}
-                      <img
-                        src={variant.primary_image}
-                        alt={variant.color_name}
-                        className="w-full aspect-square object-cover rounded-xl mb-2"
+                      <span
+                        className="w-4 h-4 rounded-full border border-black/20"
+                        style={{ backgroundColor: variant.color_hex }}
                       />
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className="w-3 h-3 rounded-full shrink-0 border border-black/20"
-                          style={{ backgroundColor: variant.color_hex }}
-                        />
-                        <span className="text-xs font-semibold text-[#5A2E0B] truncate">
-                          {variant.color_name}
-                        </span>
-                      </div>
+                      <span>{variant.color_name}</span>
                     </button>
                   );
                 })}
               </div>
-              <p className="text-xs text-[#7A0E0E] font-medium bg-[#D4A017]/15 px-3 py-2 rounded-xl border border-[#D4A017]/30">
-                Devotional Marking: {activeVariant.marking_description}
+              <p className="text-xs text-[#29231D]/75">
+                {activeVariant.marking_description}
               </p>
             </div>
 
-            {/* Quantity & Purchase Buttons */}
-            <div className="space-y-3 pt-1">
+            {/* Quantity & Add to Cart */}
+            <div className="space-y-3">
               <div className="flex items-center gap-4">
-                <span className="text-sm font-semibold text-[#5A2E0B]">Quantity:</span>
-                <div className="inline-flex items-center rounded-xl border border-[#D4A017]/60 bg-white">
+                <span className="text-sm font-semibold text-[#29231D]">Quantity:</span>
+                <div className="inline-flex items-center rounded-full border border-[#C6A04A]/60 bg-white">
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="p-2.5 text-[#5A2E0B] hover:bg-[#F9F3E6]"
                     aria-label="Decrease quantity"
+                    className="p-2.5 text-[#541D25]"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="px-4 font-bold text-sm">{quantity}</span>
+                  <span className="px-4 text-sm font-bold">{quantity}</span>
                   <button
                     type="button"
                     onClick={() =>
                       setQuantity((q) => Math.min(activeVariant.stock || 50, q + 1))
                     }
-                    className="p-2.5 text-[#5A2E0B] hover:bg-[#F9F3E6]"
                     aria-label="Increase quantity"
+                    className="p-2.5 text-[#541D25]"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   type="button"
-                  disabled={activeVariant.stock <= 0}
                   onClick={handleAddToCart}
-                  className="py-4 px-6 rounded-full bg-[#7A0E0E] hover:bg-[#5f0a0a] disabled:opacity-50 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.01]"
+                  className="flex-1 py-4 px-7 rounded-full bg-[#C8242C] hover:bg-[#a91c23] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.01]"
                 >
-                  <ShoppingCart className="w-4 h-4" />
-                  ADD TO CART
+                  <ShoppingBag className="w-4 h-4" />
+                  Add to Cart
                 </button>
                 <button
                   type="button"
-                  disabled={activeVariant.stock <= 0}
-                  onClick={handleBuyNow}
-                  className="py-4 px-6 rounded-full bg-[#F26500] hover:bg-[#d85700] disabled:opacity-50 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.01]"
+                  onClick={() => {
+                    handleAddToCart();
+                    router.push("/cart");
+                  }}
+                  className="py-4 px-7 rounded-full border-2 border-[#541D25] text-[#541D25] hover:bg-[#541D25] hover:text-[#F8F3E8] font-semibold text-sm transition-colors"
                 >
-                  <Zap className="w-4 h-4" />
-                  BUY NOW
+                  Proceed to Checkout
                 </button>
               </div>
-            </div>
 
-            {/* Fabric, Dimensions & Care Info Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="p-4 rounded-2xl bg-white/75 border border-[#D4A017]/40 space-y-1.5">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#7A0E0E] flex items-center gap-1.5">
-                  <Feather className="w-3.5 h-3.5" /> Fabric & Comfort
-                </p>
-                <p className="text-xs text-[#32170B]/85 leading-relaxed">
-                  {product.fabric_summary}
-                </p>
-              </div>
-              <div className="p-4 rounded-2xl bg-white/75 border border-[#D4A017]/40 space-y-1.5">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#7A0E0E] flex items-center gap-1.5">
-                  <Ruler className="w-3.5 h-3.5" /> Size & Weight
-                </p>
-                <p className="text-xs text-[#32170B]/85 leading-relaxed">
-                  Size: {product.dimensions}
-                  <br />
-                  Weight: {product.weight}
-                </p>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white/75 border border-[#D4A017]/40 space-y-1.5">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#7A0E0E] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Care Information
-              </p>
-              <p className="text-xs text-[#32170B]/85 leading-relaxed">
-                {product.care_instructions}
-              </p>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-2 pt-1 text-center">
-              {[
-                { icon: Truck, label: "Fast Dispatch" },
-                { icon: ShieldCheck, label: "Secure Checkout" },
-                { icon: Sparkles, label: "Wholesale Ready" },
-              ].map((b) => (
-                <div
-                  key={b.label}
-                  className="p-2.5 rounded-xl bg-[#7A0E0E]/5 border border-[#D4A017]/30 flex flex-col items-center gap-1"
-                >
-                  <b.icon className="w-4 h-4 text-[#7A0E0E]" />
-                  <span className="text-[11px] font-medium text-[#5A2E0B]">{b.label}</span>
+              {addedFeedback && (
+                <div className="p-3 rounded-2xl bg-[#EFE6D5] border border-[#C6A04A]/60 text-xs text-[#541D25] flex items-center justify-between gap-2">
+                  <span>
+                    Added <strong>{activeVariant.color_name}</strong> ({quantity}) to your
+                    cart.
+                  </span>
+                  <Link href="/cart" className="font-bold text-[#C8242C] underline">
+                    Go to Cart →
+                  </Link>
                 </div>
-              ))}
+              )}
+            </div>
+
+            {/* Product Benefits (6 concise points) */}
+            <div className="ivory-card rounded-2xl p-5 space-y-2.5">
+              <h2 className="font-serif-display text-2xl font-bold text-[#541D25]">
+                Key Highlights
+              </h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-[#29231D]">
+                {BENEFITS.map((b) => (
+                  <li key={b} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-[#C8242C] shrink-0 mt-0.5" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Essential Specifications */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#29231D]/85">
+              <div className="p-4 rounded-2xl bg-[#EFE6D5]/60 border border-[#C6A04A]/35 space-y-1">
+                <p className="font-bold text-[#541D25]">Care Instructions</p>
+                <p>{product.care_instructions}</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#EFE6D5]/60 border border-[#C6A04A]/35 space-y-1">
+                <p className="font-bold text-[#541D25]">Delivery Information</p>
+                <p>Dispatched in 1–2 business days • Pan-India delivery in 3–6 days.</p>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Styling & Wearing Demonstration Section */}
-        <Reveal>
-          <StylingDemo />
-        </Reveal>
-
-        {/* Scroll Section 3: Signature Heritage Details & Packaging */}
-        <Reveal className="parchment-card rounded-3xl p-6 sm:p-10 space-y-6">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
-              Inside Every DHEERO™ Pack
-            </span>
-            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
-              Designed for Devotional Dignity & Comfort
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                title: "Dedicated Identity",
-                desc: "Crafted specifically as a Sabarimala Irumudi Rumala rather than generic multi-purpose cloth.",
-              },
-              {
-                title: "Traditional Markings",
-                desc: "Turmeric Yellow features Red Kumkum-inspired marking; Maroon Red features Yellow Gandham-inspired marking.",
-              },
-              {
-                title: "Woven Border Finish",
-                desc: "Neat traditional border detailing that frames the drape cleanly in every wearing style.",
-              },
-              {
-                title: "Pilgrimage Packaging",
-                desc: "Individually folded, quality-checked, and packed cleanly for personal use or gifting.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="p-5 rounded-2xl bg-white/80 border border-[#D4A017]/40 space-y-2"
-              >
-                <h3 className="font-serif-display text-2xl font-bold text-[#7A0E0E]">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#32170B]/85 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* Scroll Section 4: Pilgrimage Care & Colour Selection Guide */}
-        <Reveal className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-          <div className="rounded-3xl overflow-hidden border-2 border-[#D4A017]/50 shadow-xl">
-            <img
-              src="/images/rumala-trio.jpg"
-              alt="DHEERO™ Irumudi Rumala Trio"
-              className="w-full h-full object-cover aspect-[4/3]"
-            />
-          </div>
-          <div className="parchment-card rounded-3xl p-6 sm:p-9 space-y-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7A0E0E]">
-              Choosing & Caring
-            </span>
-            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#5A2E0B]">
-              Built for Long Trails & Gentle Care
-            </h2>
-            <p className="text-sm text-[#32170B]/85 leading-relaxed">
-              Whether you choose Turmeric Yellow, Light Brown, or Maroon Red, every
-              DHEERO™ Irumudi Rumala is finished for comfortable breathability during
-              forest walks and temple queues.
-            </p>
-            <ul className="space-y-2 text-sm text-[#5A2E0B]">
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
-                <span>Gentle hand wash with mild detergent keeps colours vibrant</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
-                <span>Dry in shade and iron on low heat to preserve woven borders</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
-                <span>Fold neatly along the border lines for compact Irumudi packing</span>
-              </li>
-            </ul>
-          </div>
-        </Reveal>
-
-        {/* Scroll Section 5: Wholesale Mandali & FAQ CTA */}
-        <Reveal className="rounded-3xl bg-[#7A0E0E] text-[#F9F3E6] border-2 border-[#D4A017]/70 p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-          <div className="space-y-2 max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4A017]">
-              Retail & Wholesale Support
-            </span>
-            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold">
-              Ordering for a Mandali Group or Devotional Store?
-            </h2>
-            <p className="text-sm text-[#F9F3E6]/85">
-              Dheer Eco Essentials fulfils both single-piece retail orders and bulk
-              pilgrimage group requirements across India.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 shrink-0">
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-full bg-[#F26500] hover:bg-[#d85700] text-white font-semibold text-sm shadow-lg"
-            >
-              Bulk / Wholesale Inquiry
-            </Link>
-            <Link
-              href="/faq"
-              className="px-6 py-3 rounded-full border border-[#D4A017] text-[#F9F3E6] font-semibold text-sm hover:bg-white/10"
-            >
-              Read FAQs
-            </Link>
-          </div>
-        </Reveal>
       </div>
+
+      {/* "See how it looks on you." Interactive Panel */}
+      <AnimatePresence>
+        {wearingOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-[#29231D]/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setWearingOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-xl ivory-card rounded-3xl p-5 sm:p-7 space-y-4"
+            >
+              <div className="flex items-center justify-between border-b border-[#C6A04A]/35 pb-3">
+                <div>
+                  <h3 className="font-serif-display text-2xl font-bold text-[#541D25]">
+                    How It Looks When Worn — {activeVariant.color_name}
+                  </h3>
+                  <p className="text-xs text-[#29231D]/75">
+                    Switch colours below to preview Red or Yellow on the pilgrimage trail
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setWearingOpen(false)}
+                  aria-label="Close wearing preview"
+                  className="p-2 rounded-full bg-[#541D25]/10 text-[#541D25]"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="rounded-2xl overflow-hidden border border-[#C6A04A]/50 aspect-square bg-[#EFE6D5]">
+                <img
+                  src={wearingImage}
+                  alt={`Devotee wearing DHEERO ${activeVariant.color_name} Irumudi Rumalu`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="flex items-center justify-center gap-3">
+                {variants.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => {
+                      playTempleGhanta();
+                      setSelectedVariantId(v.id);
+                    }}
+                    className={`flex items-center gap-2 px-5 py-2 rounded-full border-2 text-xs font-semibold ${
+                      v.id === activeVariant.id
+                        ? "border-[#541D25] bg-[#541D25] text-[#F8F3E8]"
+                        : "border-[#C6A04A]/50 bg-white text-[#29231D]"
+                    }`}
+                  >
+                    <span
+                      className="w-3 h-3 rounded-full border border-white/40"
+                      style={{ backgroundColor: v.color_hex }}
+                    />
+                    {v.color_name}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 export default function ShopPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="max-w-7xl mx-auto px-4 py-20 text-center text-[#5A2E0B]">
-          Loading DHEERO™ Shop...
-        </div>
-      }
-    >
-      <ShopContent />
+    <Suspense fallback={null}>
+      <ProductContent />
     </Suspense>
   );
 }

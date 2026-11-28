@@ -338,82 +338,43 @@ function seedIfEmpty(db: DatabaseSync) {
     `);
 
     insertVariant.run(
-      "var_turmeric_yellow",
+      "var_red",
       "prod_irumudi_rumala",
-      "DHR-IRU-YLW-01",
-      "Turmeric Yellow",
-      "#F4B400",
-      "Red Kumkum-inspired horizontal marking",
+      "DHR-IRU-RED-01",
+      "Red",
+      "#C8242C",
+      "Deep devotional red with woven border & stitched DHEERO label",
       399,
       120,
       1,
-      "/images/rumala-turmeric.jpg",
+      "/images/rumala-maroon.jpg",
       JSON.stringify([
-        "/images/rumala-turmeric.jpg",
-        "/images/rumala-trio.jpg",
-        "/images/rumala-brown.jpg",
         "/images/rumala-maroon.jpg",
+        "/images/wear-red.png",
+        "/images/rumala-trio.jpg",
       ]),
       JSON.stringify([]),
       1
     );
 
     insertVariant.run(
-      "var_light_brown",
+      "var_yellow",
       "prod_irumudi_rumala",
-      "DHR-IRU-BRN-01",
-      "Light Brown",
-      "#9E6B43",
-      "Devotional marking design to be finalised (editable via Admin)",
+      "DHR-IRU-YLW-01",
+      "Yellow",
+      "#E5A91A",
+      "Turmeric-inspired natural yellow with woven border & stitched DHEERO label",
       399,
-      85,
+      120,
       1,
-      "/images/rumala-brown.jpg",
+      "/images/rumala-turmeric.jpg",
       JSON.stringify([
-        "/images/rumala-brown.jpg",
-        "/images/rumala-trio.jpg",
         "/images/rumala-turmeric.jpg",
-        "/images/rumala-maroon.jpg",
+        "/images/wear-yellow.png",
+        "/images/rumala-trio.jpg",
       ]),
       JSON.stringify([]),
       2
-    );
-
-    insertVariant.run(
-      "var_maroon_red",
-      "prod_irumudi_rumala",
-      "DHR-IRU-MRN-01",
-      "Maroon Red",
-      "#7A0E0E",
-      "Yellow Gandham-inspired horizontal marking",
-      399,
-      95,
-      1,
-      "/images/rumala-maroon.jpg",
-      JSON.stringify([
-        "/images/rumala-maroon.jpg",
-        "/images/rumala-trio.jpg",
-        "/images/rumala-turmeric.jpg",
-        "/images/rumala-brown.jpg",
-      ]),
-      JSON.stringify([]),
-      3
-    );
-
-    insertVariant.run(
-      "var_black_optional",
-      "prod_irumudi_rumala",
-      "DHR-IRU-BLK-01",
-      "Black (Optional Future)",
-      "#1E1B18",
-      "Optional future variant — devotional marking to be finalised in Admin",
-      399,
-      0,
-      0,
-      "/images/rumala-trio.jpg",
-      JSON.stringify(["/images/rumala-trio.jpg"]),
-      JSON.stringify([]),
-      4
     );
   }
 

@@ -3,461 +3,243 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Award,
-  Check,
-  Compass,
-  Feather,
-  Layers,
-  ShieldCheck,
-  Sparkles,
-  Truck,
-} from "lucide-react";
-import { useStore } from "@/components/StoreProvider";
-import { GoldOrnamentalDivider, Reveal } from "@/components/MotionPrimitives";
-import { BrandStory30s } from "@/components/BrandStory30s";
+import { ArrowRight, Check } from "lucide-react";
+import { Reveal } from "@/components/MotionPrimitives";
 import { playTempleGhanta } from "@/lib/sound";
 
-const COMPARISON_ROWS = [
-  {
-    feature: "Product Identity",
-    ordinary: "General-purpose cloth",
-    dheero: "Dedicated devotional product",
-  },
-  {
-    feature: "Design",
-    ordinary: "Depends on available cloth",
-    dheero: "Thoughtfully designed combinations",
-  },
-  {
-    feature: "Colour Options",
-    ordinary: "Depends on availability",
-    dheero: "Signature selectable variants",
-  },
-  {
-    feature: "Marking",
-    ordinary: "Depends on cloth",
-    dheero: "Distinctive devotional marking",
-  },
-  {
-    feature: "Branding",
-    ordinary: "Usually unbranded",
-    dheero: "DHEERO™ identity",
-  },
-  {
-    feature: "Presentation",
-    ordinary: "Varies",
-    dheero: "Thoughtful product presentation",
-  },
-];
-
-const JOURNEY_STEPS = [
-  {
-    title: "The Hills & Forest Pathways",
-    text: "Stepping onto the shaded trails of Sabarimala, every step carries quiet focus and discipline.",
-    image: "/images/hero-sabarimala.jpg",
-  },
-  {
-    title: "The Sacred Pamba & Preparation",
-    text: "Preparing the Irumudi bundle with care, simplicity, and respect for time-honoured custom.",
-    image: "/images/rumala-trio.jpg",
-  },
-  {
-    title: "Walking Together in Faith",
-    text: "Devotees supporting one another in unity, comfort, and shared devotion along the ascent.",
-    image: "/images/login-bg.jpg",
-  },
-];
-
 export default function HomePage() {
-  const { activeCollection, settings } = useStore();
-  const isDevotional = !activeCollection || activeCollection.slug === "devotional";
-
-  const heroHeading =
-    activeCollection?.slug === "devotional"
-      ? settings.hero_heading || "A Journey of Faith.\nA Tradition of Devotion."
-      : activeCollection?.tagline || "A Journey of Faith.\nA Tradition of Devotion.";
-
-  const heroSub =
-    activeCollection?.slug === "devotional"
-      ? settings.hero_subheading ||
-        "DHEERO™ – Thoughtfully designed essentials for the sacred journey."
-      : activeCollection?.description ||
-        "Thoughtfully designed headwear and lifestyle essentials.";
-
   return (
-    <div className="overflow-hidden">
-      {/* SECTION 2: CINEMATIC HERO */}
-      <section className="relative min-h-[78vh] sm:min-h-[86vh] flex items-center justify-center overflow-hidden bg-[#1E1008]">
-        {/* Mobile Hero Image (Bright Portrait Sabarimala View) */}
-        <img
-          src={
-            activeCollection?.slug === "devotional"
-              ? "/images/hero-sabarimala-mobile.jpg"
-              : activeCollection?.hero_image || "/images/hero-sabarimala-mobile.jpg"
-          }
-          alt={activeCollection?.name || "Sabarimala Pilgrimage"}
-          className="md:hidden absolute inset-0 w-full h-full object-cover object-center animate-hero-drift brightness-105"
+    <div className="bg-[#F8F3E8] text-[#29231D] overflow-hidden">
+      {/* HERO SECTION – MINIMAL, DEVOTIONAL, CINEMATIC */}
+      <section className="relative min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] flex items-center bg-[#F8F3E8] py-8 md:py-12">
+        {/* Subtle Golden Light Aura */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_68%_45%,rgba(198,160,74,0.20)_0%,rgba(248,243,232,0)_60%)] animate-gold-aura"
         />
-        {/* Desktop Hero Image (HD Widescreen Sabarimala View) */}
-        <img
-          src={
-            activeCollection?.slug === "devotional"
-              ? "/images/hero-sabarimala.png"
-              : activeCollection?.hero_image || "/images/hero-sabarimala.png"
-          }
-          alt={activeCollection?.name || "Sabarimala Pilgrimage"}
-          className="hidden md:block absolute inset-0 w-full h-full object-cover animate-hero-drift"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E1008]/25 via-[#32170B]/15 to-[#1E1008]/55 md:from-[#1E1008]/45 md:via-[#32170B]/20 md:to-[#1E1008]/65" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,23,11,0.34)_0%,transparent_64%)]" />
 
-        {/* Subtle Saffron Flag Motion Accent */}
-        <div className="hidden lg:block absolute top-10 left-10 pointer-events-none animate-flag-flutter opacity-90">
-          <div className="px-4 py-1.5 rounded-full bg-[#32170B]/75 border border-[#D4A017]/70 text-[#F9F3E6] text-xs tracking-widest uppercase shadow-lg">
-            {activeCollection?.name || "Devotional Collection"}
-          </div>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6 py-14">
-          {/* Centered Transparent Logo with Soft Luminous Halo */}
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="inline-block rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(255,250,235,0.92)_0%,rgba(255,250,235,0.45)_55%,transparent_78%)] px-8 py-3"
-          >
-            <img
-              src="/images/dheero-logo.png"
-              alt="DHEERO™"
-              className="h-20 sm:h-24 w-auto mx-auto drop-shadow-[0_4px_14px_rgba(50,23,11,0.35)]"
-            />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.12 }}
-            className="font-serif-display text-4xl sm:text-6xl lg:text-7xl font-bold text-[#F9F3E6] leading-[1.08] drop-shadow-[0_4px_20px_rgba(0,0,0,0.65)] whitespace-pre-line"
-          >
-            {heroHeading}
-          </motion.h1>
-
-          <GoldOrnamentalDivider />
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.25 }}
-            className="text-base sm:text-xl text-white font-bold max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] bg-[#32170B]/55 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-[#D4A017]/50"
-          >
-            {heroSub}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
-          >
-            <Link
-              href="/shop"
-              onClick={() => playTempleGhanta()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#F26500] hover:bg-[#d85700] text-white font-bold text-sm sm:text-base tracking-wide shadow-[0_10px_30px_rgba(242,101,0,0.45)] transition-transform hover:scale-105"
-            >
-              <span>
-                {isDevotional ? "EXPLORE IRUMUDI RUMALA" : "EXPLORE COLLECTION"}
-              </span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-
-          {isDevotional && (
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Golden Ayyappa Swamy + Red Headscarf Visual (Top on Mobile, Right on Desktop) */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="pt-3"
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-6 lg:order-2 flex justify-center"
             >
-              <span className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#7A0E0E]/90 border border-[#D4A017]/70 text-[#F9F3E6] font-serif-display text-lg sm:text-xl tracking-wide shadow-lg">
-                <span className="text-[#D4A017]">✦</span>
-                {settings.hero_mantra || "Swamiye Saranam Ayyappa"}
-                <span className="text-[#D4A017]">✦</span>
-              </span>
+              <div className="relative w-full max-w-md lg:max-w-lg rounded-3xl overflow-hidden border border-[#C6A04A]/50 shadow-[0_24px_60px_-18px_rgba(84,29,37,0.28)] bg-[#EFE6D5]">
+                <img
+                  src="/images/ayyappa-hero.png"
+                  alt="Lord Ayyappa Swamy in golden tone carrying Irumudi with red DHEERO headscarf"
+                  className="w-full h-auto object-cover"
+                />
+                {/* Subtle golden rim highlight */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[#C6A04A]/45 rounded-3xl"
+                />
+              </div>
             </motion.div>
-          )}
-        </div>
-      </section>
 
-      {/* 4 GRAND FEATURE HIGHLIGHTS STRIP */}
-      <section className="parchment-surface border-b-2 border-[#D4A017]/45">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-            {[
-              {
-                icon: Layers,
-                title: "Single Product Focus",
-                sub: "Dedicated Irumudi Rumala crafted with purpose",
-              },
-              {
-                icon: Award,
-                title: "Traditional Quality",
-                sub: "Thoughtful • Respectful • Neat Finish",
-              },
-              {
-                icon: Compass,
-                title: "For Your Sacred Journey",
-                sub: "Designed for Sabarimala Pilgrims",
-              },
-              {
-                icon: Truck,
-                title: "Pan-India Delivery",
-                sub: "Safe • Reliable • On Time Dispatch",
-              },
-            ].map((item, idx) => (
-              <Reveal
-                key={item.title}
-                delay={idx * 0.08}
-                className="parchment-card rounded-2xl p-6 flex items-center gap-4 border-2 border-[#D4A017]/50 hover:-translate-y-1 transition-transform duration-300"
+            {/* Minimal Brand, Product Identification & Telugu Caption */}
+            <div className="lg:col-span-6 lg:order-1 text-center lg:text-left space-y-5">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.65 }}
+                className="flex flex-col items-center lg:items-start gap-2"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#7A0E0E] text-[#D4A017] flex items-center justify-center shrink-0 border border-[#D4A017]/60 shadow-md">
-                  <item.icon className="w-7 h-7" />
-                </div>
-                <div>
-                  <p className="font-serif-display font-bold text-xl sm:text-2xl text-[#5A2E0B] leading-tight">
-                    {item.title}
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#7A0E0E]/85 mt-1 font-medium">
-                    {item.sub}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+                <img
+                  src="/images/dheero-logo.png"
+                  alt="DHEERO"
+                  className="h-14 sm:h-16 w-auto object-contain"
+                />
+                <span className="font-telugu text-sm sm:text-base font-semibold tracking-wider text-[#541D25]">
+                  ఇరుముడి రుమాలు
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.95 }}
+                className="font-telugu text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#29231D] leading-[1.32]"
+              >
+                ఇరుముడి కట్టు శబరిమల ఎక్కువ
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.25 }}
+                className="pt-2"
+              >
+                <Link
+                  href="/shop"
+                  onClick={() => playTempleGhanta()}
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#541D25] hover:bg-[#3f141b] text-[#F8F3E8] text-sm font-semibold tracking-wide shadow-md transition-transform hover:scale-[1.02]"
+                >
+                  <span>Explore ఇరుముడి రుమాలు</span>
+                  <ArrowRight className="w-4 h-4 text-[#C6A04A]" />
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: PRODUCT INTRODUCTION */}
-      <section className="py-7 sm:py-10 parchment-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <Reveal className="space-y-5">
-              <span className="inline-block px-4 py-1 rounded-full bg-[#7A0E0E] text-[#F9F3E6] text-xs font-semibold uppercase tracking-[0.2em]">
-                Introducing DHEERO™
+      {/* STORYTELLING CHAPTERS */}
+      <div id="our-story" className="scroll-mt-20">
+        {/* CHAPTER 1 – THE DEVOTIONAL JOURNEY */}
+        <section className="py-12 sm:py-16 bg-[#EFE6D5]/65 border-t border-[#C6A04A]/30">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <Reveal className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-sm rounded-3xl overflow-hidden border border-[#C6A04A]/50 shadow-xl bg-[#F8F3E8]">
+                <img
+                  src="/images/ayyappa-tiger.png"
+                  alt="Lord Ayyappa Swamy seated majestically"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1} className="lg:col-span-7 space-y-4">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#96752D]">
+                Chapter I • The Devotional Journey
               </span>
-              <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B] leading-tight">
-                More Than a Rumala. A Thoughtful Expression of Devotion.
+              <h2 className="font-telugu text-2xl sm:text-4xl font-bold text-[#541D25] leading-snug">
+                ప్రతి అడుగులో భక్తి. ప్రతి స్పర్శలో పవిత్రత.
               </h2>
-              <p className="text-sm sm:text-base text-[#32170B]/85 leading-relaxed">
-                Created for Ayyappa Swamy devotees who value comfort, neat presentation,
-                and traditional inspiration, the DHEERO™ Irumudi Rumala brings dedicated
-                product identity to a cherished pilgrimage essential.
+              <p className="text-sm sm:text-base text-[#29231D]/85 leading-relaxed">
+                The Irumudi journey is far more than a physical trek. It is a path of
+                devotion, self-discipline, and quiet surrender — where every essential
+                carried or worn on the journey deserves care, cleanliness, and respect.
               </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            </Reveal>
+          </div>
+        </section>
+
+        {/* CHAPTER 2 – WHY DHEERO? */}
+        <section className="py-12 sm:py-16 bg-[#F8F3E8] border-t border-[#C6A04A]/30">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <Reveal className="text-center max-w-3xl mx-auto space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#96752D]">
+                Chapter II • Why DHEERO
+              </span>
+              <h2 className="font-telugu text-2xl sm:text-4xl font-bold text-[#541D25] leading-snug">
+                మీ యాత్రలో పరిశుభ్రతకు ఒక సహజమైన తోడు.
+              </h2>
+              <p className="text-sm sm:text-base text-[#29231D]/80 leading-relaxed">
+                During long pilgrimage walks, devotees naturally experience perspiration,
+                continuous cloth-to-skin contact, and discomfort from ordinary fabrics.
+                DHEERO introduces a thoughtfully crafted, naturally dyed, herbal-inspired
+                cloth designed to stay comfortable, breathable, and reusable throughout
+                your yatra.
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+              {[
+                {
+                  title: "Sweat Comfort",
+                  desc: "Breathable cotton weave suited for warm walks and hill ascents.",
+                },
+                {
+                  title: "Gentle Skin Contact",
+                  desc: "Soft finishing made for extended wear around the forehead and head.",
+                },
+                {
+                  title: "Clean & Reusable",
+                  desc: "Designed to wash easily and accompany you beyond a single journey.",
+                },
+                {
+                  title: "Respectful Identity",
+                  desc: "A meaningful part of your devotional journey, crafted with dignity.",
+                },
+              ].map((item, idx) => (
+                <Reveal
+                  key={item.title}
+                  delay={idx * 0.06}
+                  className="ivory-card rounded-2xl p-5 space-y-1.5"
+                >
+                  <h3 className="font-serif-display text-xl font-bold text-[#541D25]">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#29231D]/80 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CHAPTER 3 – THE NATURAL FABRIC & WOVEN DHEERO LABEL */}
+        <section className="py-12 sm:py-16 bg-[#EFE6D5]/70 border-t border-[#C6A04A]/30">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <Reveal className="lg:col-span-6 space-y-5">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#96752D]">
+                Chapter III • The Natural Fabric
+              </span>
+              <h2 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#541D25]">
+                Natural Dye Concept & Thoughtful Textile Craft
+              </h2>
+              <p className="text-sm sm:text-base text-[#29231D]/85 leading-relaxed">
+                Every DHEERO ఇరుముడి రుమాలు is conceived around natural-dye and
+                herbal-infused textile principles — prioritising breathable comfort,
+                clean finishing, and multipurpose everyday reusability.
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-[#29231D]">
                 {[
-                  "Dedicated devotional product identity",
-                  "Traditional-inspired colour combinations",
-                  "Distinctive horizontal devotional markings",
-                  "Comfort-focused breathable fabric",
-                  "Thoughtful folding & presentation",
-                  "Available in Retail & Wholesale",
-                ].map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-2 text-sm text-[#5A2E0B]"
-                  >
-                    <Check className="w-4 h-4 text-[#F26500] shrink-0 mt-0.5" />
-                    <span>{point}</span>
+                  "Natural dye-inspired palette",
+                  "Herbal-infused textile concept",
+                  "Comfortable skin contact",
+                  "Reusable & multipurpose design",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#C8242C] shrink-0" />
+                    <span>{pt}</span>
                   </li>
                 ))}
               </ul>
+
               <div className="pt-2">
                 <Link
                   href="/shop"
                   onClick={() => playTempleGhanta()}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#7A0E0E] hover:bg-[#5f0a0a] text-[#F9F3E6] font-semibold text-sm shadow-lg transition-transform hover:scale-105"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C8242C] hover:bg-[#a91c23] text-white text-sm font-semibold shadow-md transition-transform hover:scale-[1.02]"
                 >
-                  DISCOVER THE RUMALA <ArrowRight className="w-4 h-4" />
+                  <span>Inspect Product in 360°</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </Reveal>
 
-            <Reveal delay={0.15}>
-              <div className="relative rounded-3xl overflow-hidden border-2 border-[#D4A017]/60 shadow-2xl">
-                <img
-                  src="/images/rumala-trio.jpg"
-                  alt="DHEERO™ Irumudi Rumala Collection"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#32170B]/90 via-[#32170B]/40 to-transparent p-5 text-[#F9F3E6]">
-                  <p className="font-serif-display text-xl font-bold">
-                    Turmeric Yellow • Light Brown • Maroon Red
-                  </p>
-                  <p className="text-xs text-[#F9F3E6]/80">
-                    Crafted with traditional borders and respectful devotional markings
-                  </p>
+            {/* Macro Woven Cotton & Stitched DHEERO Label (inspired by reference) */}
+            <Reveal delay={0.1} className="lg:col-span-6 space-y-4">
+              <div className="rounded-3xl overflow-hidden border border-[#C6A04A]/60 shadow-xl woven-cotton-texture p-8 sm:p-12">
+                <div className="border-t-2 border-b-2 border-dashed border-[#96752D]/35 py-8 flex items-center justify-center">
+                  <div className="woven-cotton-texture px-8 sm:px-12 py-5 rounded-md shadow-[0_8px_22px_rgba(41,35,29,0.22)] border border-[#C6A04A]/50 text-center">
+                    <span className="font-serif-display text-3xl sm:text-4xl font-bold tracking-[0.14em] text-[#29231D]">
+                      DHEERO<sup className="text-sm ml-0.5">™</sup>
+                    </span>
+                  </div>
                 </div>
+                <p className="text-center text-xs text-[#541D25]/80 mt-4 font-medium">
+                  Macro view — woven cotton texture & stitched DHEERO™ label
+                </p>
+              </div>
+
+              {/* Subtle Future Architecture Note */}
+              <div className="px-4 py-3 rounded-2xl bg-[#F8F3E8]/85 border border-[#C6A04A]/35 text-xs text-[#29231D]/75 text-center">
+                Future-ready parent architecture for{" "}
+                <strong className="text-[#541D25]">DHEERO Lifestyle Essentials</strong>{" "}
+                (headwear, sweat-management, and travel textiles).
               </div>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 6: THE 30-SECOND DHEERO BRAND STORY */}
-      <section className="py-7 sm:py-10 parchment-surface">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2">
-            <GoldOrnamentalDivider label="Brand Storytelling" />
-            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
-              DHEERO — The Spirit of Courage Within You
-            </h2>
-            <p className="text-sm sm:text-base text-[#5A2E0B]/80">
-              DHEER (courage) + HERO. Experience our 30-second visual journey from the
-              quiet forest to the spirit of devotion.
-            </p>
-          </Reveal>
-          <Reveal>
-            <BrandStory30s />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* SECTION 7: THE MEANING OF THE SACRED JOURNEY */}
-      <section className="py-8 sm:py-12 bg-[#32170B] text-[#F9F3E6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-6">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4A017]">
-              Pilgrimage Reflections
-            </span>
-            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#F9F3E6]">
-              Every Journey Begins With Faith.
-            </h2>
-            <p className="text-sm sm:text-base text-[#F9F3E6]/80">
-              A journey shaped by devotion, discipline, simplicity and the spirit of
-              togetherness.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {JOURNEY_STEPS.map((step, i) => (
-              <Reveal
-                key={step.title}
-                delay={i * 0.12}
-                className="rounded-2xl overflow-hidden bg-[#462110] border border-[#D4A017]/40 flex flex-col"
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div className="p-6 space-y-2 flex-1">
-                  <h3 className="font-serif-display text-2xl font-bold text-[#D4A017]">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-[#F9F3E6]/85 leading-relaxed">{step.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 8: WHY CHOOSE DHEERO? */}
-      <section className="py-7 sm:py-10 parchment-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center max-w-2xl mx-auto space-y-2 mb-6">
-            <GoldOrnamentalDivider label="Why DHEERO™" />
-            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
-              Thoughtful Craft in Every Detail
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Sparkles,
-                title: "Thoughtful Design",
-                desc: "Designed specifically as a devotional headwear essential rather than a generic piece of cloth.",
-              },
-              {
-                icon: Award,
-                title: "Traditional Inspiration",
-                desc: "Colour tones and horizontal markings respectfully inspired by Gandham, Vibhuti, and Kumkum.",
-              },
-              {
-                icon: Feather,
-                title: "Comfort-Focused Fabric",
-                desc: "Prioritising soft, breathable comfort suited for warm days and cool hill mornings.",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Carefully Presented",
-                desc: "Neatly folded, branded, and packaged with care for personal use or respectful gifting.",
-              },
-            ].map((card, i) => (
-              <Reveal
-                key={card.title}
-                delay={i * 0.08}
-                className="parchment-card rounded-2xl p-6 space-y-3 hover:-translate-y-1 transition-transform"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#7A0E0E] text-[#D4A017] flex items-center justify-center shadow">
-                  <card.icon className="w-6 h-6" />
-                </div>
-                <h3 className="font-serif-display text-2xl font-bold text-[#5A2E0B]">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-[#5A2E0B]/80 leading-relaxed">{card.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 9: ORDINARY RUMALA VS DHEERO RUMALA */}
-      <section className="py-7 sm:py-10 bg-[#F4E9D5]/35 backdrop-blur-[1px] border-t border-[#D4A017]/35">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-          <Reveal className="text-center space-y-2">
-            <GoldOrnamentalDivider label="Comparison" />
-            <h2 className="font-serif-display text-3xl sm:text-5xl font-bold text-[#5A2E0B]">
-              Ordinary Rumala vs DHEERO™ Rumala
-            </h2>
-            <p className="text-sm text-[#5A2E0B]/80">
-              A respectful comparison of product focus and presentation. Traditional cloth
-              remains deeply respected; DHEERO™ simply offers a dedicated alternative.
-            </p>
-          </Reveal>
-
-          <Reveal className="parchment-card rounded-2xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-[#7A0E0E] text-[#F9F3E6]">
-                    <th className="p-4 font-serif-display text-lg font-bold">Feature</th>
-                    <th className="p-4 font-serif-display text-lg font-bold">
-                      Ordinary / Unbranded Rumala
-                    </th>
-                    <th className="p-4 font-serif-display text-lg font-bold text-[#D4A017]">
-                      DHEERO™ Irumudi Rumala
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#D4A017]/30 text-sm">
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.feature} className="hover:bg-white/50">
-                      <td className="p-4 font-semibold text-[#5A2E0B]">{row.feature}</td>
-                      <td className="p-4 text-[#5A2E0B]/75">{row.ordinary}</td>
-                      <td className="p-4 font-semibold text-[#7A0E0E]">{row.dheero}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
